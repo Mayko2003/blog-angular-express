@@ -1,0 +1,12 @@
+{
+  "name": "blog-angular-express",
+  "version": "1.0.0",
+  "description": "other blog app with angular and express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": ""
+  },
+  "author": "Mayko2003",
+  "license": "ISC"
+}
