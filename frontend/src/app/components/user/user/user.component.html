@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="avatar-secction">
+        <div class="d-flex justify-content-center my-5">
+            <img src="{{user.avatar}}" alt="" class="rounded-circle img-fluid w-25 h-25">
+        </div>
+    </div>
+    <div class="info-secction text-center">
+        <div>
+            <h2 class="fst-italic">{{(user.firstName + ' ' + user.lastName) | titlecase }}</h2>
+            <p class="text-secondary">{{user.email}}</p>
+        </div>
+        <div class="options-secction">
+
+        </div>
+    </div>
+    
+</div>

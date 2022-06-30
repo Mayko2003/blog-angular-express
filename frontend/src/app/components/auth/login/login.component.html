@@ -1,0 +1,18 @@
+
+<div class="container col-6">
+    <form action="" #loginForm="ngForm">
+        <h3 class="text-center">Sign In</h3>
+        <igx-input-group class="mb-3">
+            <input igxInput type="email"  name="email" required="true" [(ngModel)]="user.email"/>
+            <label igxLabel for="email">Email</label>
+        </igx-input-group>
+        <igx-input-group class="mb-3">
+            <input type="password" igxInput  name="password" required="true" [(ngModel)]="user.password" />
+            <label igxLabel for="password">Password</label>
+        </igx-input-group>
+        <div class="d-flex justify-content-center">
+            <button type="button" (click)="login()" class="mb-3 btn btn-primary" [disabled]="loginForm.form.invalid">Login</button>
+        </div>
+        
+    </form>
+</div>

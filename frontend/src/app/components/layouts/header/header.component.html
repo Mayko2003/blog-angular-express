@@ -1,0 +1,36 @@
+<div class="content-wrap">
+    <igx-nav-drawer id="navigation" #drawer [isOpen]="false" [pinThreshold]="5000">
+      <ng-template igxDrawer>
+        <nav>
+          <span igxDrawerItem [isHeader]="true">MENU</span>
+          <div *ngFor="let item of navItems">
+            <span  igxDrawerItem igxRipple (click)="redirectTo(item.redirect)" *ngIf="item.active">
+              <div *ngIf="item.text == 'Profile'; else elseblock">
+                <igx-avatar *ngIf="user.avatar" src="{{user.avatar}}" [roundShape]="true" size="small"></igx-avatar>
+                <igx-avatar *ngIf="!user.avatar" icon="person" [roundShape]="true"></igx-avatar>
+              </div>
+              <ng-template #elseblock>
+                <igx-avatar icon="{{item.name}}" [roundShape]="true" class="bg-light" size="small"></igx-avatar>
+                <!-- <igx-icon family="material">{{ item.name }}</igx-icon> -->
+              </ng-template>
+              <span>{{ item.text == 'Profile'? user.username:item.text }}</span>
+            </span>
+          </div>
+        </nav>
+      </ng-template>
+    </igx-nav-drawer>
+  
+    <main class="d-flex">
+      <!-- <button (click)="drawer.toggle()"> Menu </button> -->
+      <span igxButton="icon" igxToggleAction="navigation">
+        <igx-icon family="material">menu</igx-icon>
+      </span>
+      <div class="ms-auto mt-1">
+        <button igxButton="icon" (click)="redirectTo('/post/create')">
+          <igx-avatar icon="add" [roundShape]="true" size="large"></igx-avatar>
+        </button>
+      </div>
+      
+    </main>
+    
+</div>

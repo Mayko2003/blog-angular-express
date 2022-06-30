@@ -1,0 +1,32 @@
+<div class="container col-6">
+    <form action="" #registerForm="ngForm">
+        <h3 class="text-center">Register</h3>
+        <igx-input-group class="mb-3">
+            <input igxInput type="text"  name="username" required [(ngModel)]="user.username"/>
+            <label igxLabel for="username">Username</label>
+        </igx-input-group>
+        <igx-input-group class="mb-3">
+            <input igxInput type="text"  name="firstName" required [(ngModel)]="user.firstName"/>
+            <label igxLabel for="firstName">First Name</label>
+        </igx-input-group>
+        <igx-input-group class="mb-3">
+            <input igxInput type="text"  name="lasName" required [(ngModel)]="user.lastName"/>
+            <label igxLabel for="lasName">Last Name</label>
+        </igx-input-group>
+        <igx-input-group class="mb-3">
+            <input igxInput type="email"  name="email" required [(ngModel)]="user.email"/>
+            <label igxLabel for="email">Email</label>
+        </igx-input-group>
+        <igx-input-group class="mb-3">
+            <input type="password" igxInput  name="password" required [(ngModel)]="user.password" />
+            <label igxLabel for="password">Password</label>
+        </igx-input-group>
+        <igx-input-group class="mb-3">
+            <input type="file" igxInput name="avatar" (change)="getFile($event)" accept="image/png, image/jpeg, image/gif"  />
+        </igx-input-group>
+        
+        <div class="d-flex justify-content-center">
+            <button type="button" (click)="register()" class="mb-3 btn btn-primary" [disabled]="registerForm.form.invalid || !upload">Register</button>
+        </div>
+    </form>
+</div>
