@@ -1,5 +1,4 @@
 const User = require('../models/user.js');
-
 const commentController = {};
 
 commentController.getAllCommentsByPost = async (req, res) => {
