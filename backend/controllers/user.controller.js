@@ -34,9 +34,21 @@ userController.getUser = async (req, res) => {
 
 userController.createUser = async (req, res) => {
     try{
-        const user = new User(req.body);
-        await user.save();
-        res.json({ message: 'User created' });
+        const errors = {};
+        //check if username exists
+        var q = await User.findOne({ username: req.body.username });
+        if(q) errors.username = 'Username already exists';
+        //check if email is already in use
+        q = await User.findOne({ email: req.body.email });
+        if(q) errors.email = 'Email already in use';
+
+        if(Object.keys(errors).length > 0){
+            res.status(400).json(errors);
+        }else{
+            const user = new User(req.body);
+            await user.save();
+            res.json({ message: 'User created' });
+        }
     }
     catch(err){
         res.status(500).json({ message: err.message });
