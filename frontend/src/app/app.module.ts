@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/auth/login/login.component';
@@ -29,6 +29,8 @@ import { PostComponent } from './components/post/post/post.component';
 import { PostFormComponent } from './components/post/post-form/post-form.component';
 import { UserComponent } from './components/user/user/user.component';
 import { NotFound404Component } from './components/status/not-found404/not-found404.component';
+import { AuthService } from './services/auth.service';
+import { RequestInterceptorService } from './services/request-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,14 @@ import { NotFound404Component } from './components/status/not-found404/not-found
     IgxSnackbarModule,
     IgxAvatarModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
