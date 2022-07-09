@@ -10,7 +10,7 @@ router.post('/', authController.verifyToken, postController.createPost);
 router.put('/:id', authController.verifyToken, postController.updatePost);
 router.delete('/:id', authController.verifyToken, postController.inactivatePost);
 router.get('/status/published', authController.verifyToken, postController.getPublishedPosts);
-router.get('/time/recent', authController.verifyToken, postController.getRecentPosts);
+router.get('/time/recent', postController.getRecentPosts);
 
 // export the router
 module.exports = router;
