@@ -10,7 +10,7 @@ export class EmailServiceService {
   private urlBase = 'http://localhost:3000/api/emails'
   constructor(private http:HttpClient) { }
 
-  sendEmail(email:string, text:string):Observable<any>{
+  sendEmail(email:string, text:string, subject: string):Observable<any>{
     const options = {
       method: 'POST',
       headers: {
@@ -19,7 +19,8 @@ export class EmailServiceService {
     }
     const body = {
       email: email,
-      text: text
+      text: text,
+      subject: subject
     }
     return this.http.post(this.urlBase + '/send', body, options)
   }
