@@ -18,15 +18,21 @@
             <label igxLabel for="email">Email</label>
         </igx-input-group>
         <igx-input-group class="mb-3">
-            <input type="password" igxInput  name="password" required [(ngModel)]="user.password" />
-            <label igxLabel for="password">Password</label>
+            <input type="password" igxInput (ngModelChange)="verifyPassword()"  name="password" required [(ngModel)]="user.password" />
+            <label igxLabel for="password" >Password</label>
         </igx-input-group>
+        <div class="progress mb-3" style="height: .5em;">
+            <div id="password-bar" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
         <igx-input-group class="mb-3">
             <input type="file" igxInput name="avatar" (change)="getFile($event)" accept="image/png, image/jpeg, image/gif"  />
         </igx-input-group>
         
         <div class="d-flex justify-content-center">
-            <button type="button" (click)="register()" class="mb-3 btn btn-primary" [disabled]="registerForm.form.invalid || !upload">Register</button>
+            <button type="button" (click)="register()" class="mb-3 btn btn-primary" [disabled]="registerForm.form.invalid || !upload || !passwordStatus">Register</button>
         </div>
     </form>
+</div>
+<div class="extras">
+    <igx-toast #toast></igx-toast>
 </div>

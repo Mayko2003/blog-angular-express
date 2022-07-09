@@ -31,14 +31,21 @@ export class UserService {
     return this._http.get(this._url+'/user/'+username, options);
   }
 
-  createUser(user: any): Observable<any> {
+  createUser(user: any, password:string): Observable<any> {
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       }
     }
-    const body = JSON.stringify(user);
+    const body = {
+      username: user.username,
+      password: password,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      avatar: user.avatar
+    }
     return this._http.post(this._url, body, options);
   }
 
