@@ -4,17 +4,18 @@ const emailController = {}
 emailController.sendEmail = async (req, res) => {
     const email = req.body.email;
     const text = req.body.text;
+    const subject = req.body.subject;
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'quequeres12@gmail.com',
-            pass: 'mhlvfytwxogouyxe'
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
         }
     });
     const mailOptions = {
-        from: 'quequeres12@gmail.com',
+        from: process.env.EMAIL_USER,
         to: email,
-        subject: 'Testeando',
+        subject: subject,
         text: text
     };
     transporter.sendMail(mailOptions, function (error, info) {
