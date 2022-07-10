@@ -5,10 +5,10 @@
             <input igxInput type="text"  name="title" required [(ngModel)]="post.title"/>
             <label igxLabel for="title">Title</label>
         </igx-input-group>
-        <div class="mb-3">
-            <ckeditor [(ngModel)]="model.editorData" name="editorData" [editor]="editor" [config]="editorConfig"></ckeditor>
+        <div class="mb-3" id="ckeditor">
+            <ckeditor  name="editorData" [editor]="editor"></ckeditor>
         </div>
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center mt-3">
             <button type="button" (click)="save('active',snackbar)" class="mb-3 me-3 btn btn-primary" [disabled]="postForm.form.invalid">Publish</button>
             <button type="button" (click)="save('save',snackbar)" class="mb-3 btn btn-primary" [disabled]="postForm.form.invalid">Only Save</button>
         </div>
