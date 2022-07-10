@@ -64,6 +64,7 @@ export class RegisterComponent implements OnInit {
   register() {
     const pass = CryptJS.AES.encrypt(this.user.password, environment.password_key).toString()
     this.userService.createUser(this.user, pass).subscribe(res => {
+      this.router.navigate(['/login'])
     }, err => {
       if (err.error.username) {
         this.toast.textMessage = "Username already exists"
