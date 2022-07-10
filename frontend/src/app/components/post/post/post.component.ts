@@ -14,14 +14,15 @@ export class PostComponent implements OnInit {
 
   post!:Post
   safeContent!: SafeHtml
-  constructor(private postService: PostService, private authService: AuthService, private activatedRoute: ActivatedRoute,  private sanitizer: DomSanitizer) { }
+  constructor(private postService: PostService, private authService: AuthService, private activatedRoute: ActivatedRoute,  private sanitizer: DomSanitizer) { 
+    this.post = new Post()
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       if(params['slug']){
         this.postService.getPost(params['slug']).subscribe(post => {
-          this.post = new Post()
-          Object.assign(this.post, post)
+          this.post = post
           this.safeContent = this.sanitizer.bypassSecurityTrustHtml(this.post.content)
         })
       }
