@@ -15,7 +15,7 @@ import { passwordStrength } from 'check-password-strength'
 export class RegisterComponent implements OnInit {
 
   user!: User
-  upload: boolean = false
+  invalidAvatar: boolean = true
   passwordStatus: boolean = false
   @ViewChild('toast', { static: true }) toast!: IgxToastComponent;
   constructor(private userService: UserService, private router: Router, private authService: AuthService) {
@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
     //size
     if (e.target.files[0].size / 1024 / 1024 > 8) {
       alert("File size should be less than 8MB")
-      this.upload = false
+      this.invalidAvatar = true
       return;
     }
 
@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
     var nam: string = e.target.files[0].name.split('.').pop()
     if (!allowedExtensions.includes(nam)) {
       alert("Extension not valid, only allow png, pjeg or gift")
-      this.upload = false
+      this.invalidAvatar = true
       return;
     }
 
@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit {
         this.user.avatar = base64
       }
     }
-    this.upload = true
+    this.invalidAvatar = false
   }
 
   register() {
