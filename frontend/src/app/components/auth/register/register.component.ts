@@ -35,16 +35,24 @@ export class RegisterComponent implements OnInit {
 
     //size
     if (e.target.files[0].size / 1024 / 1024 > 8) {
-      alert("File size should be less than 8MB")
+      this.toast.textMessage = "File size must be less than 8MB"
+      this.toast.displayTime = 1000
+      this.toast.open()
       this.invalidAvatar = true
+      e.target.value = null
+      e.path[1].innerText = "No file chosen"
       return;
     }
 
     //extension
     var nam: string = e.target.files[0].name.split('.').pop()
     if (!allowedExtensions.includes(nam)) {
-      alert("Extension not valid, only allow png, pjeg or gift")
+      this.toast.textMessage = "File extension must be png, jpeg or gif"
+      this.toast.displayTime = 1000
+      this.toast.open()
       this.invalidAvatar = true
+      e.target.value = null
+      e.path[1].innerText = "No file chosen"
       return;
     }
 
