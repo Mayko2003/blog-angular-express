@@ -1,17 +1,36 @@
-<div>
-    <div class="search-section">
-        <h1 class="text-center">WELCOME</h1>
+<div class="">
+    <div class="seach-section bg-dark w-100 h-100">
+        <div class="text-center text-light pt-5">
+            <h1>WELCOME TO BLOG</h1>
+        </div>
+        <div class="w-100 py-5">
+            <div class="col-md-8 mx-auto">
+                <form action="" class="d-flex justify-content-center" method="get">
+                    <div class="input-group col-md-12">
+                        <input class="form-control" type="text" placeholder="Ingrese una palabra...">
+                        <input type="submit" value="Buscar" class="ms-2 btn btn-success">
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="post-section d-flex row mx-auto">
-        <div *ngFor="let post of recentPosts" class="col-4">
+    <div class="post-section d-flex row mx-auto my-3 col-md-8">
+        <h4 class="fst-italic">Recent Posts</h4>
+        <div *ngIf="!recentPosts || !recentPosts.length">
+            <h4 class="text-center">There aren't recent posts</h4>
+        </div>
+        <div *ngFor="let post of recentPosts" class="my-2">
             <igx-card>
                 <igx-card-header>
                     <h3 igxCardHeaderTitle>{{post.title}}</h3>
-                    <h5 igxCardHeaderSubtitle>By: <a class="link-secondary" routerLink="/user/{{post.user.username}}">{{post.user.username}}</a></h5>
+                    <h5 igxCardHeaderSubtitle>By: <a class="link-secondary"
+                            routerLink="/user/{{post.user.username}}">{{post.user.username}}</a></h5>
                 </igx-card-header>
                 <igx-card-actions>
                     <button igxButton (click)="readMore(post.slug)">{{'Read More'}}</button>
-                    <button igxButton="icon" igxRipple><igx-icon>{{'favorite'}}</igx-icon></button>
+                    <button igxButton="icon" igxRipple>
+                        <igx-icon>{{'favorite'}}</igx-icon>
+                    </button>
                 </igx-card-actions>
             </igx-card>
         </div>
@@ -20,4 +39,3 @@
 <div class="extras">
     <igx-toast #toast>Please Login</igx-toast>
 </div>
-
