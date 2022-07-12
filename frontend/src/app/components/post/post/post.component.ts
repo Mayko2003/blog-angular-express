@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { Comment } from 'src/app/models/comment';
 import { Post } from 'src/app/models/post';
+import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 
@@ -16,6 +18,8 @@ export class PostComponent implements OnInit {
   safeContent!: SafeHtml
   constructor(private postService: PostService, private authService: AuthService, private activatedRoute: ActivatedRoute,  private sanitizer: DomSanitizer) { 
     this.post = new Post()
+    this.post.user = new User()
+    this.post.comments = []
   }
 
   ngOnInit(): void {

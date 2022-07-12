@@ -16,7 +16,7 @@ postController.getAllPosts = async (req, res) => {
 
 postController.getPostBySlug = async (req, res) => {
     try{
-        const post = await Post.findOne({ slug: req.params.slug }).populate('user').populate('comments');
+        const post = await Post.findOne({ slug: req.params.slug }).populate('user', 'firstName lastName username').populate('comments');
         res.json(post);
     }
     catch(err){

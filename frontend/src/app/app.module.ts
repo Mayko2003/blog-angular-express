@@ -21,7 +21,8 @@ import {
   IgxFocusModule,
   IgxCardModule,
   IgxSnackbarModule,
-  IgxToastModule
+  IgxToastModule,
+  IgxDividerModule
 } from 'igniteui-angular';
 import { HomeComponent } from './components/layouts/home/home.component';
 import { RegisterComponent } from './components/auth/register/register.component';
@@ -64,7 +65,8 @@ import { RequestInterceptorService } from './services/request-interceptor.servic
     IgxCardModule,
     IgxSnackbarModule,
     IgxAvatarModule,
-    IgxToastModule
+    IgxToastModule,
+    IgxDividerModule
   ],
   providers: [
     AuthService,
