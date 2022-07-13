@@ -78,7 +78,7 @@ postController.getPublishedPosts = async (req, res) => {
 
 postController.getRecentPosts = async (req, res) => {
     try{
-        const posts = await Post.find({ status: 'active' }).sort({ createdAt: -1 }).limit(8).populate('user','username');
+        const posts = await Post.find({ status: 'active' }).sort({ createdAt: -1 }).limit(15).populate('user','username');
         res.json(posts);
     }
     catch(err){

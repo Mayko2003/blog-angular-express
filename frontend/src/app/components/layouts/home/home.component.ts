@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Post } from 'src/app/models/post';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
-import { IgxToastComponent } from 'igniteui-angular';
+import { IgxPaginatorComponent, IgxToastComponent } from 'igniteui-angular';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -14,6 +14,8 @@ export class HomeComponent implements OnInit {
   recentPosts!:Post[]
 
   @ViewChild('toast', {static: true}) toast!: IgxToastComponent;
+  
+  @ViewChild('paginator', { static: true }) public paginator!: IgxPaginatorComponent;
 
   constructor(public authService: AuthService, private router:Router, private postService: PostService) {
   }
@@ -38,7 +40,19 @@ export class HomeComponent implements OnInit {
       //open the toast component
       this.toast.open()
     }
+  }
 
+  getRecentPosts():Post[]{
+    let posts = this.recentPosts
+    if(this.paginator){
+      posts = posts.slice(this.paginator.page * this.paginator.perPage, (this.paginator.page + 1) * this.paginator.perPage)
+      return posts
+    }
+    return posts
+  }
+
+  navigateToFirstPage(){
+    this.paginator.page = 0
   }
 
 

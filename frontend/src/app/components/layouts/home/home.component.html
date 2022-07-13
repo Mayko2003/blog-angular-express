@@ -19,7 +19,7 @@
         <div *ngIf="!recentPosts || !recentPosts.length">
             <h4 class="text-center">There aren't recent posts</h4>
         </div>
-        <div *ngFor="let post of recentPosts" class="my-2">
+        <div *ngFor="let post of getRecentPosts()" class="my-2">
             <igx-card>
                 <igx-card-header>
                     <h3 igxCardHeaderTitle>{{post.title}}</h3>
@@ -34,6 +34,12 @@
                 </igx-card-actions>
             </igx-card>
         </div>
+        <igx-paginator #paginator
+            [perPage]="3"
+            [selectOptions]="[3,5]"
+            [totalRecords]="recentPosts.length"
+            (perPageChange)="navigateToFirstPage()">
+        </igx-paginator>
     </div>
 </div>
 <div class="extras">
