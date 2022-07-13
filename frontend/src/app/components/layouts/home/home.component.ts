@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
     if(this.router.url === '/logout'){
       this.authService.logout()
       window.location.href = '/'
+      return;
     }
 
     this.postService.getRecentPosts().subscribe(posts => {

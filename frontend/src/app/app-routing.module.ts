@@ -6,13 +6,13 @@ import { HomeComponent } from './components/layouts/home/home.component';
 import { PostFormComponent } from './components/post/post-form/post-form.component';
 import { PostComponent } from './components/post/post/post.component';
 import { UserComponent } from './components/user/user/user.component';
-
+import { AuthGuardService } from './services/auth-guard.service';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent},
-  { path: 'post/create', component: PostFormComponent},
-  { path: 'post/:slug', component: PostComponent},
-  { path: 'user/:username', component: UserComponent},
+  { path: 'post/create', component: PostFormComponent, canActivate: [AuthGuardService]},
+  { path: 'post/:slug', component: PostComponent, canActivate: [AuthGuardService]},
+  { path: 'user/:username', component: UserComponent, canActivate: [AuthGuardService]},
   { path: '**', component: HomeComponent},
 ];
 
