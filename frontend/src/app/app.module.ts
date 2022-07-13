@@ -22,7 +22,10 @@ import {
   IgxCardModule,
   IgxSnackbarModule,
   IgxToastModule,
-  IgxDividerModule
+  IgxDividerModule,
+  IgxDialogModule,
+  IgxPaginatorModule,
+  IgxButtonGroupModule
 } from 'igniteui-angular';
 import { HomeComponent } from './components/layouts/home/home.component';
 import { RegisterComponent } from './components/auth/register/register.component';
@@ -66,7 +69,10 @@ import { RequestInterceptorService } from './services/request-interceptor.servic
     IgxSnackbarModule,
     IgxAvatarModule,
     IgxToastModule,
-    IgxDividerModule
+    IgxDividerModule,
+    IgxDialogModule,
+    IgxPaginatorModule,
+    IgxButtonGroupModule
   ],
   providers: [
     AuthService,

@@ -1,3 +1,4 @@
+import { Comment } from "./comment"
 import { User } from "./user"
 
 export class Post {
@@ -7,7 +8,7 @@ export class Post {
     content!:string
     date!:Date
     user!:User
-    comments!:Comment[]
+    comments!:Array<Comment>
     status!:string
 
     constructor(init?: Partial<Post>) {

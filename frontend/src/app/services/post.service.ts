@@ -61,4 +61,15 @@ export class PostService {
     }
     return this._http.get(this._url + '/published', options)
   }
+
+  updatePost(post: Post):Observable<any>{
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    const body = JSON.stringify(post)
+    return this._http.put(this._url + '/' + post._id, body, options)
+  }
 }
