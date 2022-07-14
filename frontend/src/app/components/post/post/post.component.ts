@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IgxPaginatorComponent, IgxToastComponent } from 'igniteui-angular';
 import { Comment } from 'src/app/models/comment';
 import { Post } from 'src/app/models/post';
@@ -23,7 +23,7 @@ export class PostComponent implements OnInit {
 
   @ViewChild('paginator', { static: true }) public paginator!: IgxPaginatorComponent;
 
-  constructor(private postService: PostService, private authService: AuthService, private activatedRoute: ActivatedRoute,  private sanitizer: DomSanitizer, private commentService: CommentService) { 
+  constructor(private postService: PostService, private authService: AuthService, private activatedRoute: ActivatedRoute,  private sanitizer: DomSanitizer, private commentService: CommentService, private router: Router) { 
     this.post = new Post()
     this.post.user = new User()
     this.post.comments = new Array<Comment>()
@@ -34,8 +34,17 @@ export class PostComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       if(params['slug']){
         this.postService.getPost(params['slug']).subscribe(post => {
-          this.post = post
-          this.safeContent = this.sanitizer.bypassSecurityTrustHtml(this.post.content)
+          if(post){
+            this.post = post
+            this.safeContent = this.sanitizer.bypassSecurityTrustHtml(this.post.content)
+          }
+          else{
+            setTimeout(() => {
+              this.router.navigate(['/404'], { skipLocationChange: true })
+            }, 0)
+          }
+        }, err => {
+          this.router.navigate(['/404'])
         })
       }
     })

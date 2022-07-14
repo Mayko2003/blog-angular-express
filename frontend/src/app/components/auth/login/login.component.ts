@@ -4,7 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import * as CryptJS from 'crypto-js';
 import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,22 +13,29 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  user!:User
+  user!: User
 
-  constructor(private authService: AuthService, private router:Router) {
+  constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.user = new User()
     this.user.email = ""
     this.user.password = ""
   }
 
   ngOnInit(): void {
-    if(this.authService.isLoggedIn()){
-      this.router.navigate(['/'])
-    }
+    this.activatedRoute.data.subscribe(
+      (data:any) => {
+        if (data.logout) {
+          this.authService.logout()
+          window.location.href = '/login'
+        }
+        else if(this.authService.isLoggedIn()) {
+          this.router.navigate(['/'])
+        }
+    })
   }
 
-  login(){
-    this.authService.login(this.user.email,this.user.password).subscribe(
+  login() {
+    this.authService.login(this.user.email, this.user.password).subscribe(
       (result) => {
         this.authService.setToken(result.jwt)
         window.location.href = '/'

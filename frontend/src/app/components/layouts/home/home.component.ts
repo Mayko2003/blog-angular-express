@@ -18,15 +18,10 @@ export class HomeComponent implements OnInit {
   @ViewChild('paginator', { static: true }) public paginator!: IgxPaginatorComponent;
 
   constructor(public authService: AuthService, private router:Router, private postService: PostService) {
+    this.recentPosts = []
   }
 
   ngOnInit(): void {
-    if(this.router.url === '/logout'){
-      this.authService.logout()
-      window.location.href = '/'
-      return;
-    }
-
     this.postService.getRecentPosts().subscribe(posts => {
       this.recentPosts = []
       Object.assign(this.recentPosts, posts)
